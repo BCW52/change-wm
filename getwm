@@ -1,0 +1,22 @@
+#!/bin/bash
+i3=(
+    ["1"]="one"
+)
+marco=(
+    ["2"]="two"
+)
+echo ' Which window manager to setup:'
+echo ' 1. i3'
+echo ' 2. marco(default)'
+read -p "Choose window manager: " wmdata
+if [ "$wmdata" == 1 -o "$wmdata" == "i3" ];
+then
+dconf load /org/mate/desktop/session/required-components/ < /etc/wm-changer/wm-i3
+echo "i3: the tilling window manager is active now. Reboot ot relogin for reloading the session."
+elif [ "$wmdata" != 1 ];
+then
+dconf load /org/mate/desktop/session/required-components/ < /etc/wm-changer/wm-default
+echo "Marco: the default window manager is active now. Reboot ot relogin for reloading the session."
+else
+echo "Something is wrong..."
+fi
